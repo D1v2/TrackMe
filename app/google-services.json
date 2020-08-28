@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "532199435688",
-    "firebase_url": "https://trackme-9d93e.firebaseio.com",
-    "project_id": "trackme-9d93e",
-    "storage_bucket": "trackme-9d93e.appspot.com"
+    "project_number": "486551778241",
+    "firebase_url": "https://track-me-d64e9.firebaseio.com",
+    "project_id": "track-me-d64e9",
+    "storage_bucket": "track-me-d64e9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:532199435688:android:08dee3def3105a8a9f019d",
+        "mobilesdk_app_id": "1:486551778241:android:d24ab4a09187aeb0a5f540",
         "android_client_info": {
           "package_name": "com.example.trackme"
         }
       },
       "oauth_client": [
         {
-          "client_id": "532199435688-eu5m6k7bgq4dljn74f9p7c7u35f2sb5c.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.trackme",
-            "certificate_hash": "958b1b7ec9f09f7816a6d7a81c1f4f5c2c834f71"
-          }
-        },
-        {
-          "client_id": "532199435688-ia9qqiuo4s9k4e4ql7tpb8ku8gl90mb9.apps.googleusercontent.com",
+          "client_id": "486551778241-etv2nhoh804p1mq8bb1kmvpr3v0r3eas.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDAvatjH0HP8uZzQlcPrBjkvpYBGy_uT7Q"
+          "current_key": "AIzaSyBZEuzuXbHvCfsM1Du7pIYJnBFBhnnFgcI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "532199435688-ia9qqiuo4s9k4e4ql7tpb8ku8gl90mb9.apps.googleusercontent.com",
+              "client_id": "486551778241-etv2nhoh804p1mq8bb1kmvpr3v0r3eas.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

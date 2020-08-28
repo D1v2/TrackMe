@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".activities.MainActivity"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
     android:id="@+id/drawer_layout"
@@ -20,20 +20,25 @@
         android:layout_gravity="start"
         >
     </com.google.android.material.navigation.NavigationView>
-    <LinearLayout
-        android:layout_marginTop="60dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hii"
-            android:textSize="50dp"
-            />
-        <Button
+            android:layout_below="@+id/addcontect"
+            android:id="@+id/name"/>
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hello"/>
-    </LinearLayout>
+            android:layout_below="@+id/name"
+            android:id="@+id/number"/>
+        <Button
+            android:id="@+id/addcontect"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="350dp"
+            android:background="@drawable/contectadd"
+            />
+    </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

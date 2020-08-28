@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#703A42</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#044B40</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#BB8231</color>
+    <color name="colorPrimaryText">#292121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="colorDivider">#BDBDBD</color>
+    <color name="colorTextIcon">#FFFFFF</color>
+    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorHintText">#BDBDBD</color>
+    <color name="colorMeetingStart">#D39239</color>
+    <color name="colorMeetingEnd">#FCF0E6E7</color>
+    <color name="colorTextPrimary">#DAE7EE</color>
+    <color name="colorTextSecondry">#1C1C1D</color>
 </resources>

@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">TrackMe</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="track_me">Track Me</string>
+    <string name="welcome_to">Welcome To</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

@@ -1,88 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1EFC6"
-    tools:context=".Signup">
+    android:background="@color/colorBackground"
+    tools:context=".activities.Signup">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:id="@+id/layoutHeader"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:id="@+id/imageBack"
+            android:src="@drawable/ic_back"
+            android:tint="@color/colorTextIcon"
+            android:contentDescription="@string/app_name"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:includeFontPadding="false"
+            android:text="@string/sign_up"
+            android:textColor="@color/colorTextIcon"
+            android:textSize="@dimen/_15ssp"
+            />
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutHeader">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="100dp"
-            android:orientation="vertical"
-            android:background="#F3F1F0"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Signup"
-                android:textSize="40dp"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:gravity="center"/>
-            <EditText
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/edittext"
-                android:hint="Enter Your Name"
-                android:padding="10dp"
-                android:layout_marginBottom="20dp"
-                android:inputType="text"
-                android:ems="10"
-                />
-            <EditText
-                android:id="@+id/semail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/edittext"
-                android:hint="Enter Your Email"
-                android:padding="10dp"
-                android:inputType="textEmailAddress"
-                android:ems="10"
-                />
-            <EditText
-                android:id="@+id/phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/edittext"
-                android:hint="Enter Your Phone Number"
-                android:inputType="phone"
-                android:padding="10dp"
-                android:ems="10"
-                />
-            <EditText
-                android:id="@+id/spass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/edittext"
-                android:hint="Enter Your Password"
-                android:inputType="textPassword"
-                android:padding="10dp"
-                android:ems="10"
-                />
-            <Button
-                android:id="@+id/signup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Signup"
-                android:background="@drawable/btn_gradin"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#ffff"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="Fill your details"
+                android:textSize="@dimen/_15ssp"
+                android:textColor="@color/colorPrimaryText"
                 />
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/_20sdp"
+                app:cardCornerRadius="@dimen/_4sdp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_4sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:includeFontPadding="false"
+                        android:text="First name"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="@dimen/_11ssp"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:id="@+id/inputFirstName"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:background="@null"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:hint="alic"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textColorHint="@color/colorHintText"
+                        android:textSize="@dimen/_13ssp"
+                        android:importantForAutofill="no"
+                        android:includeFontPadding="false"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:includeFontPadding="false"
+                        android:text="Last name"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="@dimen/_11ssp"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:id="@+id/inputLastName"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:background="@null"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:hint="deo"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textColorHint="@color/colorHintText"
+                        android:textSize="@dimen/_13ssp"
+                        android:importantForAutofill="no"
+                        android:includeFontPadding="false"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:includeFontPadding="false"
+                        android:text="Email"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="@dimen/_11ssp"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:id="@+id/inputEmail"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:background="@null"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:hint="abcd@gmail.com"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textColorHint="@color/colorHintText"
+                        android:textSize="@dimen/_13ssp"
+                        android:importantForAutofill="no"
+                        android:includeFontPadding="false"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:includeFontPadding="false"
+                        android:text="Password "
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="@dimen/_11ssp"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:id="@+id/inputPassword"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:background="@null"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:hint="********"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textColorHint="@color/colorHintText"
+                        android:textSize="@dimen/_13ssp"
+                        android:importantForAutofill="no"
+                        android:includeFontPadding="false"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:includeFontPadding="false"
+                        android:text="Confirm Password : "
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="@dimen/_11ssp"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:id="@+id/inputConfirmPassword"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:background="@null"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:hint="*********"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textColorHint="@color/colorHintText"
+                        android:textSize="@dimen/_13ssp"
+                        android:importantForAutofill="no"
+                        android:includeFontPadding="false"
+                        />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:id="@+id/buttonSignUp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:fontFamily="@font/ubuntu_bold"
+                    android:includeFontPadding="false"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintTop_toBottomOf="@id/cardSignin"
+                    />
+                <ProgressBar
+                    android:id="@+id/signUpProgressBar"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible" />
+            </FrameLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="Already have an account ?"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/_13ssp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textSignIn"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:padding="@dimen/_6sdp"
+                android:text="@string/login"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/_14ssp"
+                android:textAllCaps="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
         </LinearLayout>
+
     </ScrollView>
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
