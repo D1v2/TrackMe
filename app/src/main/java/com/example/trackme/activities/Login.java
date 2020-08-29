@@ -1,5 +1,6 @@
 package com.example.trackme.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -43,24 +44,26 @@ public class Login extends AppCompatActivity {
             } else if (inputPassword.getText().toString().trim().isEmpty()) {
                 Toast.makeText(Login.this, "Enter Password", Toast.LENGTH_SHORT).show();
             } else {
+
             }
+        });
+        findViewById(R.id.textSignUp).setOnClickListener(v -> {
+            Intent intent=new Intent(getApplicationContext(),Signup.class);
+            startActivity(intent);
         });
     }
     private void signIn(View view){
         buttonSignIn.setVisibility(View.INVISIBLE);
         signInProgressBar.setVisibility(View.VISIBLE);
         auth.signInWithEmailAndPassword(inputEmail.getText().toString(),inputPassword.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful() && task.getResult()!=null){
-                            Toast.makeText(Login.this,"User Logged in succesfully",Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            buttonSignIn.setVisibility(View.VISIBLE);
-                            signInProgressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(Login.this,"Wrong email or password",Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult()!=null){
+                        Toast.makeText(Login.this,"User Logged in succesfully",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        buttonSignIn.setVisibility(View.VISIBLE);
+                        signInProgressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(Login.this,"Wrong email or password",Toast.LENGTH_SHORT).show();
                     }
                 });
     }

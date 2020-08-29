@@ -6,4 +6,5 @@
     <string name="welcome_to">Welcome To</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
+    <string name="register">Register</string>
 </resources>

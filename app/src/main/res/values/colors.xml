@@ -13,4 +13,5 @@
     <color name="colorMeetingEnd">#FCF0E6E7</color>
     <color name="colorTextPrimary">#DAE7EE</color>
     <color name="colorTextSecondry">#1C1C1D</color>
+    <color name="colorTextThree">#E4E4EE</color>
 </resources>
