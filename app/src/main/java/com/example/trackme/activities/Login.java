@@ -25,12 +25,13 @@ public class Login extends AppCompatActivity {
     private Button buttonSignIn;
     private ProgressBar signInProgressBar;
     private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        auth=FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);
         buttonSignIn = findViewById(R.id.buttonSignIn);
@@ -44,26 +45,29 @@ public class Login extends AppCompatActivity {
             } else if (inputPassword.getText().toString().trim().isEmpty()) {
                 Toast.makeText(Login.this, "Enter Password", Toast.LENGTH_SHORT).show();
             } else {
-
+                signIn();
             }
         });
         findViewById(R.id.textSignUp).setOnClickListener(v -> {
-            Intent intent=new Intent(getApplicationContext(),Signup.class);
+            Intent intent = new Intent(getApplicationContext(), Signup.class);
             startActivity(intent);
         });
     }
-    private void signIn(View view){
+
+    private void signIn() {
         buttonSignIn.setVisibility(View.INVISIBLE);
         signInProgressBar.setVisibility(View.VISIBLE);
-        auth.signInWithEmailAndPassword(inputEmail.getText().toString(),inputPassword.getText().toString())
+        auth.signInWithEmailAndPassword(inputEmail.getText().toString(), inputPassword.getText().toString())
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult()!=null){
-                        Toast.makeText(Login.this,"User Logged in succesfully",Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    if (task.isSuccessful() && task.getResult() != null) {
+
+                        Toast.makeText(Login.this, "User Logged in succesfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    } else {
                         buttonSignIn.setVisibility(View.VISIBLE);
                         signInProgressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(Login.this,"Wrong email or password",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

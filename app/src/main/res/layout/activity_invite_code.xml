@@ -8,20 +8,40 @@
     android:orientation="vertical"
     android:background="@color/colorPrimary"
     >
+    <ImageView
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:id="@+id/imageBack"
+        android:src="@drawable/ic_back"
+        android:tint="@color/colorTextIcon"
+        android:contentDescription="@string/app_name"
+        tools:ignore="MissingConstraints" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ciclerImageView"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/defaultusericon"
+        app:layout_constraintBottom_toTopOf="@+id/code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu_bold"
-        android:hint="XXXXXX"
+        android:hint="XXXXX"
+        android:textColor="@color/colorTextPrimary"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286"
-        android:textColor="@color/colorTextPrimary"/>
+        app:layout_constraintVertical_bias="0.409" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,6 +56,13 @@
         tools:ignore="MissingConstraints"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/svave"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svave"
+        tools:ignore="MissingConstraints">
     <Button
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
@@ -48,7 +75,13 @@
         android:textColor="@color/colorPrimaryText"
         android:textSize="@dimen/_13ssp"
         android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svave"
         />
+
+        <ProgressBar
+            android:id="@+id/signUpProgressBar"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

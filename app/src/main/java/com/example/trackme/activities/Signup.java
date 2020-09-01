@@ -72,7 +72,6 @@ public class Signup extends AppCompatActivity {
                 signUp();
             }
         });
-
     }
 
     private void signUp() {
@@ -84,7 +83,14 @@ public class Signup extends AppCompatActivity {
                 Name.getText().toString().isEmpty()) {
             buttonSignUp.setVisibility(View.VISIBLE);
             signUpProgressBar.setVisibility(View.INVISIBLE);
+        }if (!(resulturi == null || inputEmail.getText().toString().isEmpty() ||
+                inputPassword.getText().toString().isEmpty() ||
+                inputPassword.getText().toString().isEmpty() ||
+                Name.getText().toString().isEmpty())) {
+            buttonSignUp.setVisibility(View.VISIBLE);
+            signUpProgressBar.setVisibility(View.INVISIBLE);
         }
+
         generateCode();
     }
 
