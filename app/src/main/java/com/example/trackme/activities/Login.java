@@ -18,6 +18,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.karan.churi.PermissionManager.PermissionManager;
+
+import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
 
@@ -25,6 +29,7 @@ public class Login extends AppCompatActivity {
     private Button buttonSignIn;
     private ProgressBar signInProgressBar;
     private FirebaseAuth auth;
+    PermissionManager  manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,8 @@ public class Login extends AppCompatActivity {
         inputPassword = findViewById(R.id.inputPassword);
         buttonSignIn = findViewById(R.id.buttonSignIn);
         signInProgressBar = findViewById(R.id.signInProgressBar);
+        manager=new PermissionManager() { };
+        manager.checkAndRequestPermissions(this);
 
         buttonSignIn.setOnClickListener(v -> {
             if (inputEmail.getText().toString().trim().isEmpty()) {
@@ -51,6 +58,7 @@ public class Login extends AppCompatActivity {
         findViewById(R.id.textSignUp).setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), Signup.class);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -59,16 +67,30 @@ public class Login extends AppCompatActivity {
         signInProgressBar.setVisibility(View.VISIBLE);
         auth.signInWithEmailAndPassword(inputEmail.getText().toString(), inputPassword.getText().toString())
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user=auth.getCurrentUser();
+                            if(user.isEmailVerified()){
+                              Intent intent = new Intent(getApplicationContext(), UserLocationMainActivity.class);
+                              startActivity(intent);
+                              finish();
+                             }else {
+                                buttonSignIn.setVisibility(View.VISIBLE);
+                            Toast.makeText(getApplicationContext(),"Email not Verified",Toast.LENGTH_SHORT).show();
+                             }
 
-                        Toast.makeText(Login.this, "User Logged in succesfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
                     } else {
                         buttonSignIn.setVisibility(View.VISIBLE);
                         signInProgressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(Login.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        manager.checkResult(requestCode,permissions,grantResults);
+        ArrayList<String> denied=manager.getStatus().get(0).denied;
+        if(denied.isEmpty()){
+            Toast.makeText(this,"Permission Enabled",Toast.LENGTH_SHORT).show();
+        }
     }
 }

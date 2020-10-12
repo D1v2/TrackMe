@@ -28,7 +28,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Signup extends AppCompatActivity {
     private EditText Name, inputEmail, inputPassword, inputConfirmPassword;
     private Button buttonSignUp;
-    private ProgressBar signUpProgressBar;
     CircleImageView circleImageView;
     Uri resulturi;
 
@@ -50,7 +49,6 @@ public class Signup extends AppCompatActivity {
         inputPassword = findViewById(R.id.inputPassword);
         inputConfirmPassword = findViewById(R.id.inputConfirmPassword);
         buttonSignUp = findViewById(R.id.buttonSignUp);
-        signUpProgressBar = findViewById(R.id.signUpProgressBar);
         circleImageView = findViewById(R.id.ciclerImageView);
         auth = FirebaseAuth.getInstance();
         circleImageView.setOnClickListener(v -> imageSelected());
@@ -75,20 +73,14 @@ public class Signup extends AppCompatActivity {
     }
 
     private void signUp() {
-        buttonSignUp.setVisibility(View.INVISIBLE);
-        signUpProgressBar.setVisibility(View.VISIBLE);
         if (resulturi == null || inputEmail.getText().toString().isEmpty() ||
                 inputPassword.getText().toString().isEmpty() ||
                 inputPassword.getText().toString().isEmpty() ||
                 Name.getText().toString().isEmpty()) {
-            buttonSignUp.setVisibility(View.VISIBLE);
-            signUpProgressBar.setVisibility(View.INVISIBLE);
         }if (!(resulturi == null || inputEmail.getText().toString().isEmpty() ||
                 inputPassword.getText().toString().isEmpty() ||
                 inputPassword.getText().toString().isEmpty() ||
                 Name.getText().toString().isEmpty())) {
-            buttonSignUp.setVisibility(View.VISIBLE);
-            signUpProgressBar.setVisibility(View.INVISIBLE);
         }
 
         generateCode();
@@ -111,6 +103,7 @@ public class Signup extends AppCompatActivity {
             intent.putExtra("code", code);
             intent.putExtra("image", resulturi);
             startActivity(intent);
+            finish();
         } else {
             Toast.makeText(getApplicationContext(), "Please Choose Image", Toast.LENGTH_SHORT).show();
         }

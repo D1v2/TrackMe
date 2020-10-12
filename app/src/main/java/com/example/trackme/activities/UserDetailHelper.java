@@ -1,7 +1,9 @@
-package com.example.trackme.Helper;
+package com.example.trackme.activities;
 
 public class UserDetailHelper {
-    String name,email,password,code,issharing,lng,lat,imageUri;
+
+    public UserDetailHelper()
+    {}
 
     public UserDetailHelper(String name, String email, String password, String code, String issharing, String lng, String lat, String imageUri) {
         this.name = name;
@@ -13,8 +15,5 @@ public class UserDetailHelper {
         this.lat = lat;
         this.imageUri = imageUri;
     }
-
-    public UserDetailHelper() {
-    }
-
+    public String name,email,password,code,issharing,lng,lat,imageUri;
 }

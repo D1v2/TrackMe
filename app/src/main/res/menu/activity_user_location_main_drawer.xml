@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_join"
+            android:title="Join" />
+        <item
+            android:id="@+id/nav_myJoin"
+            android:title="My Join" />
+        <item
+            android:id="@+id/nav_joined"
+            android:title="Joined" />
+        <item
+            android:id="@+id/nav_inviteMembers"
+            android:title="Invite Member" />
+        <item
+            android:id="@+id/nav_shareLocation"
+            android:title="Share Location" />
+        <item
+            android:id="@+id/nav_signout"
+            android:title="Sign Out" />
+    </group>
+</menu>

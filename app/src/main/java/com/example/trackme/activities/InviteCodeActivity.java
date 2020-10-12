@@ -1,30 +1,25 @@
 package com.example.trackme.activities;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.trackme.Helper.UserDetailHelper;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.trackme.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,12 +32,11 @@ public class InviteCodeActivity extends AppCompatActivity {
     Uri uriImage;
     CircleImageView circleImageView;
 
-    FirebaseAuth auth;
+    FirebaseAuth firebaseAuth;
     FirebaseUser user;
     DatabaseReference reference;
-
-    ProgressBar progressBar;
     ProgressDialog progressDialog;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +48,10 @@ public class InviteCodeActivity extends AppCompatActivity {
         circleImageView=findViewById(R.id.ciclerImageView);
         findViewById(R.id.imageBack).setOnClickListener(v -> onBackPressed());
 
-        auth=FirebaseAuth.getInstance();
         progressDialog=new ProgressDialog(this);
-        progressBar=findViewById(R.id.signUpProgressBar);
+        firebaseAuth=FirebaseAuth.getInstance();
         reference= FirebaseDatabase.getInstance().getReference().child("Users");
+        storageReference= FirebaseStorage.getInstance().getReference().child("UserImages");
 
         Intent intent=getIntent();
         if (intent!=null){
@@ -71,42 +65,72 @@ public class InviteCodeActivity extends AppCompatActivity {
         }
         code.setText(tcode);
         circleImageView.setImageURI(uriImage);
-
-
-        buttonRegister.setOnClickListener(v -> registerUser());
-
+        buttonRegister.setOnClickListener(v -> {
+           register();
+        });
     }
-    public void registerUser(){
-        progressDialog.setMessage("Please Wait ...");
+    public void register(){
+        progressDialog.setMessage("Please Wait...");
         progressDialog.show();
 
-        auth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(task -> {
+        firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                UserDetailHelper userDetailHelper=new UserDetailHelper(name,email,password,tcode,"false","no","no","no");
+                user=firebaseAuth.getCurrentUser();
+                userId=user.getUid();
+                reference.child(userId).setValue(userDetailHelper).addOnCompleteListener(task1 -> {
+                    if(task1.isSuccessful()) {
 
-                    try{
-                    if (task.isSuccessful()) {
-                        UserDetailHelper userDetailHelper = new UserDetailHelper(name, email, password, tcode, "false", "na", "na", "na");
-
-                        user = auth.getCurrentUser();
-                        userId = user.getUid();
-                        reference.child(userId).setValue(userDetailHelper).addOnCompleteListener(task1 -> {
-                            if (task1.isSuccessful()) {
-                                progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(), "Signup successfull complete", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "User not created", Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
-                            }
+                        StorageReference sr=storageReference.child(user.getUid()+".jpg");
+                        sr.putFile(uriImage).addOnCompleteListener(task11 -> {
+                        if(task11.isSuccessful()){
+                            String download_image= task11.getResult().getUploadSessionUri().toString();
+                            reference.child(user.getUid()).child("imageUri").setValue(download_image).addOnCompleteListener(task111 -> {
+                             if(task111.isSuccessful()){
+                                 progressDialog.dismiss();
+                                 SentEmailVerification();
+                                 Intent intent=new Intent(InviteCodeActivity.this,MainActivity.class);
+                                 startActivity(intent);
+                                 finish();
+                             }
+                             else {
+                                 progressDialog.dismiss();
+                                 Toast.makeText(getApplicationContext(),"Unable to User Creating",Toast.LENGTH_SHORT).show();
+                                 finish();
+                             }
+                            });
+                        }
                         });
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Unable to create a user ", Toast.LENGTH_SHORT).show();
                     }
-                }catch (Exception e){
-                       Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                    else {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"Problem Occured",Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 });
+            }else{
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),"Something Error",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+    }
+
+    private void SentEmailVerification() {
+        user.sendEmailVerification().addOnCompleteListener(task -> {
+           if(task.isSuccessful()){
+               Toast.makeText(getApplicationContext(), "Email Send For Verification", Toast.LENGTH_SHORT).show();
+               firebaseAuth.signOut();
+               finish();
+           }else {
+               Toast.makeText(getApplicationContext(), "Email Not Send", Toast.LENGTH_SHORT).show();
+           }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
